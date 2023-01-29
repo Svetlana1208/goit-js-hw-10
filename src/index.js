@@ -16,6 +16,9 @@ refs.input.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 function onSearch (e) {
     const name = e.target.value;
 
+    if (name !== "") {
+        
+    
     API.fetchCountries(name)
         .then(result => {
 
@@ -41,28 +44,18 @@ function onSearch (e) {
                     `).join("");
                 
                 refs.countryInfo.insertAdjacentHTML('beforeend', markupCountry);
-
-    
             }
-
-
         })
-        .catch(onFetchError);
+            .catch(onFetchError);
+    }
+    else {
+      refs.countryList.innerHTML = "";
+      refs.countryInfo.innerHTML = "";  
+    }
 }
 
 
 function onFetchError(error) {
     console.log(error);
 }
-// const markupList = elements => {
-//     return elements.map(element => {
-//         const country = document.createElement('p');
-//         country.textContent = element;
-
-//         return country;
-//     });
-// };
-
-// const el = markupList(result);
-// refs.countryList.append(...el);
 
