@@ -3,7 +3,7 @@ import API from "./fetchCountries";
 import debounce from 'lodash.debounce';
 import { Notify } from '../node_modules/notiflix/build/notiflix-notify-aio';
 
-const DEBOUNCE_DELAY = 500;
+const DEBOUNCE_DELAY = 300;
 
 const refs = {
     input: document.querySelector('#search-box'),
@@ -14,10 +14,9 @@ const refs = {
 refs.input.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
 function onSearch (e) {
-    const name = e.target.value;
+    const name = e.target.value.trim();
 
     if (name !== "") {
-        
     
     API.fetchCountries(name)
         .then(result => {
@@ -56,6 +55,6 @@ function onSearch (e) {
 
 
 function onFetchError(error) {
-    console.log(error);
+    Notify.failure("Oops, there is no country with that name");
 }
 
