@@ -14,6 +14,9 @@ const refs = {
 refs.input.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
 function onSearch (e) {
+    refs.countryList.innerHTML = "";
+    refs.countryInfo.innerHTML = "";  
+
     const name = e.target.value.trim();
 
     if (name !== "") {
@@ -46,10 +49,6 @@ function onSearch (e) {
             }
         })
             .catch(onFetchError);
-    }
-    else {
-      refs.countryList.innerHTML = "";
-      refs.countryInfo.innerHTML = "";  
     }
 }
 
